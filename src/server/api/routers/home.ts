@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
-export const postRouter = createTRPCRouter({
+export const homeRouter = createTRPCRouter({
   hello: publicProcedure
     .input(z.object({ text: z.string() }))
     .query(({ input, ctx }) => {
@@ -10,7 +10,7 @@ export const postRouter = createTRPCRouter({
       return {
         greeting: `Hellox ${input.text}`,
       };
-      
+
     }),
 
   create: publicProcedure
@@ -28,5 +28,11 @@ export const postRouter = createTRPCRouter({
     }
     return post ?? null;
   }),
+
+  showGroup: publicProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      return `Group Annoucement for ${input.userId}`;
+    }),
 
 });
