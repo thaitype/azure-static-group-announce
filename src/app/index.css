@@ -54,6 +54,11 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
 
 .container {
   display: flex;
@@ -96,6 +101,9 @@ input:focus-visible {
     background-color: #747bff;
     color: #ffffff;
   }
+  button:disabled {
+    background-color: #aaa;
+  }  
   input {
     border: 1px solid #747bff;
     background-color: #f9f9f9;

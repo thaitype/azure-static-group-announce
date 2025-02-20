@@ -5,9 +5,12 @@ const usersSheetClient = sheetClient.users;
 export class GoogleSheetService {
   constructor(public sheetClient: typeof usersSheetClient) { }
 
-  async getUsers() {
+  async getUserById(id: string) {
     for await (const row of this.sheetClient.readAll()) {
-      console.log(`Row: ${JSON.stringify(row)}`);
+      if (String(row?.Id).trim() === id.trim()) {
+        return row;
+      }
     }
+    return null;
   }
 }
