@@ -42,7 +42,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #646cff;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -51,6 +51,36 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 24em;
+}
+
+input {
+  border-radius: 8px;
+  border: 1px solid #646cff;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  color: white;
+  transition: border-color 0.25s;
+}
+input::placeholder {
+  color: #aaa;
+}
+input:hover {
+  border-color: #646cff;
+}
+input:focus,
+input:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
@@ -63,6 +93,12 @@ button:focus-visible {
     color: #747bff;
   }
   button {
+    background-color: #747bff;
+    color: #ffffff;
+  }
+  input {
+    border: 1px solid #747bff;
     background-color: #f9f9f9;
+    color: #333;
   }
 }

@@ -1,32 +1,32 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
+import { useRef, useState } from 'react';
 import { api } from "~/trpc/react";
-import viteLogo from '/vite.svg';
 import './App.css';
+import { trpc } from '~/trpc/api';
 
 function App() {
   const [count, setCount] = useState(0);
+  const userIdRef = useRef<HTMLInputElement>(null);
 
-  const post = api.post.hello.useQuery({ text: 'world' });
+  // const post = api.home.hello.useQuery({ text: 'world' });
+
+  const handleSubmit = async () => {
+    if (!userIdRef.current) {
+      return;
+    }
+    const userId = userIdRef.current.value;
+    console.log(`Submit: ${userId}`);
+    const res = await trpc.home.showGroup.query({ userId });
+    console.log(res);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className='container'>
+        <h2>Group Annoucement</h2>
+        <input type="text" name="userInput" placeholder="Enter Your ID" ref={userIdRef} />
+        <button onClick={handleSubmit}>Submit</button>
       </div>
-      <h1>{post.data?.greeting}</h1>
-      <div className="card">
-        <button onClick={() => setCount(count => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
+  
     </>
   );
 }
