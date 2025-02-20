@@ -6,7 +6,8 @@ import { Toaster, toast } from "sonner";
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const [showAnnouncement, setShowAnnouncement] = useState(false);
+  const [announcement, setAnnouncement] = useState('');
   const userIdRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async () => {
@@ -30,7 +31,9 @@ function App() {
       if(!res.found) {
         return toast.error('Error: User not found');
       }
+      setShowAnnouncement(true);
       console.log(`Name: ${res.name} at Group: ${res.group}`);
+      setAnnouncement(`Name: ${res.name} at Group: ${res.group}`);
     } catch (err) {
       console.error(err);
       toast.error('Error: Fetch Error');
@@ -43,7 +46,8 @@ function App() {
   return (
     <>
       <div className='container'>
-        <h2>Group Annoucement</h2>
+        <h2>Group Announcement</h2>
+        {showAnnouncement && <div className='announcement'>{announcement}</div>}
         <input type="text" name="userInput" placeholder="Enter Your ID" ref={userIdRef} />
         <button onClick={handleSubmit} disabled={loading}>{
           loading ? 'Loading...' : 'Submit'
